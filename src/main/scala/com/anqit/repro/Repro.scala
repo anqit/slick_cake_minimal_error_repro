@@ -3,7 +3,7 @@ package com.anqit.repro
 class Repro {
     // types from "slick"
     abstract class Table[E]
-    type TableQuery[W <: Table[_]] = List[W] // not actually a list, but need a concrete type constructor to deomonstrate the issue
+    type TableQuery[W <: Table[_]] = List[W] // not actually a list, but need a concrete type constructor to demonstrate the issue
     object TableQuery {
         def apply[W <: Table[_]]: TableQuery[W] = List[W]()
     }
