@@ -10,8 +10,8 @@ class Repro {
 
     // local models
     trait BaseEntity
-    trait SubEntityA extends BaseEntity
-    trait SubEntityB extends BaseEntity
+    case class SubEntityA() extends BaseEntity
+    case class SubEntityB() extends BaseEntity
 
     // local usage of "slick" classes
     trait BaseSchema[E <: BaseEntity] {
