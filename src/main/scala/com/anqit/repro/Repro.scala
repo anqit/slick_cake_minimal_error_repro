@@ -26,12 +26,15 @@ class Repro {
         class TableA extends BaseTableImpl[SubEntityA]
 
         // this definition compiles fine without a type annotation
-        def wrapper = TableQuery[TableA]
+        val queryA = TableQuery[TableA]
+        def wrapper = queryA
     }
 
-    // functionality specific to SubEntityB that depends on SubA
+    // functionality specific to SubEntityB that depends on SchemaA
     trait SchemaB extends BaseSchema[SubEntityB] { self: SchemaA =>
-        class TableB extends BaseTableImpl[SubEntityB]
+        class TableB extends BaseTableImpl[SubEntityB] {
+            // uses SchemaA's queryA to make a FK   
+        }
 
         /*
             attempting to define wrapper here without a type annotation results in the following compilation error:
@@ -47,7 +50,8 @@ class Repro {
             it does, however, compile if defined with an explicit type annotation as below
         */
 
-        def wrapper: TableQuery[TableB] = TableQuery[TableB]
+        val queryB = TableQuery[TableB]
+        def wrapper: TableQuery[TableB] = queryB
     }
 
     trait BaseDao[E <: BaseEntity] { self: BaseSchema[E] => }
