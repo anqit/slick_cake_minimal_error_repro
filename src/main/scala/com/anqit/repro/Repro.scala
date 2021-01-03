@@ -1,7 +1,7 @@
 package com.anqit.repro
 
 class Repro {
-    // types from external library
+    // types from "slick"
     abstract class Table[E]
     type TableQuery[W <: Table[_]] = List[W] // not actually a list, but need a concrete type constructor to deomonstrate the issue
     object TableQuery {
@@ -13,7 +13,7 @@ class Repro {
     trait SubEntityA extends BaseEntity
     trait SubEntityB extends BaseEntity
 
-    // local usage of library classes
+    // local usage of "slick" classes
     trait BaseSchema[E <: BaseEntity] {
         // provides common functionality
         abstract class BaseTableImpl[E] extends Table[E]
